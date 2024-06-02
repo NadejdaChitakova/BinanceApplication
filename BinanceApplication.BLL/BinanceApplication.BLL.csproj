@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\RequestModels\" />
+    <Folder Include="Models\ResponseModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Binance.Spot" Version="4.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BinanceApplication.Infrastructure.Data\BinanceApplication.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

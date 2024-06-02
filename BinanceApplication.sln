@@ -3,7 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinanceApplication", "BinanceApplication.csproj", "{8131B740-0089-4E26-9649-DD22495B2C99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinanceApplication.API", "..\Api\BinanceApplication.API.csproj", "{9F72414E-D9B5-4068-8C6F-A2F3E0641C02}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7E463864-D741-429A-AA6E-2149794041A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{9486F5D1-2A37-4C68-A804-61C85428CE14}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{DAE448D4-C48B-4BAF-B3DB-4CC1D4CC1404}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinanceApplication.Infrastructure", "..\BinanceApplication.Infrastructure.Data\BinanceApplication.Infrastructure.csproj", "{1C794A72-8A74-40DF-AA2F-D4A49B1CD605}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48FEDDFE-A453-49AC-A2B9-C827BD93363E}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinanceApplication.BLL", "BinanceApplication.BLL\BinanceApplication.BLL.csproj", "{E29CF5D8-3E0A-4430-ABC1-7DA9825CF09F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,13 +26,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8131B740-0089-4E26-9649-DD22495B2C99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8131B740-0089-4E26-9649-DD22495B2C99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8131B740-0089-4E26-9649-DD22495B2C99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8131B740-0089-4E26-9649-DD22495B2C99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F72414E-D9B5-4068-8C6F-A2F3E0641C02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F72414E-D9B5-4068-8C6F-A2F3E0641C02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F72414E-D9B5-4068-8C6F-A2F3E0641C02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F72414E-D9B5-4068-8C6F-A2F3E0641C02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C794A72-8A74-40DF-AA2F-D4A49B1CD605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C794A72-8A74-40DF-AA2F-D4A49B1CD605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C794A72-8A74-40DF-AA2F-D4A49B1CD605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C794A72-8A74-40DF-AA2F-D4A49B1CD605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29CF5D8-3E0A-4430-ABC1-7DA9825CF09F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29CF5D8-3E0A-4430-ABC1-7DA9825CF09F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29CF5D8-3E0A-4430-ABC1-7DA9825CF09F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29CF5D8-3E0A-4430-ABC1-7DA9825CF09F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9F72414E-D9B5-4068-8C6F-A2F3E0641C02} = {DAE448D4-C48B-4BAF-B3DB-4CC1D4CC1404}
+		{1C794A72-8A74-40DF-AA2F-D4A49B1CD605} = {9486F5D1-2A37-4C68-A804-61C85428CE14}
+		{E29CF5D8-3E0A-4430-ABC1-7DA9825CF09F} = {7E463864-D741-429A-AA6E-2149794041A1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBEAA2ED-E5F4-4844-B90D-34DDB6E9AE8C}
