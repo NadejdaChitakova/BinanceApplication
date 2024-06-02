@@ -6,6 +6,7 @@ using BinanceApplication.Infrastructure.DbEntities;
 using BinanceApplication.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Collections.Concurrent;
 
 namespace BinanceApplication.BLL.Services
 {
@@ -17,6 +18,8 @@ namespace BinanceApplication.BLL.Services
         private ISymbolPriceRepository _priceRepository;
         private IConverterService _converterService;
         private IdentityCoreDbContext _dbContext;
+        private ISymbolPriceRepository _repo;
+        private IServiceScope _scope;
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -30,32 +33,27 @@ namespace BinanceApplication.BLL.Services
         private async ValueTask BackgroundProcessing()
         {
             using var scope = serviceScopeFactory.CreateScope();
-            _dbContext = scope.ServiceProvider.GetRequiredService<IdentityCoreDbContext>();
-
-            _priceRepository = scope.ServiceProvider.GetRequiredService<ISymbolPriceRepository>();
             _converterService = scope.ServiceProvider.GetRequiredService<IConverterService>();
-
-
         }
 
         public async Task GetStreamData()
         {
-            List<string> buffer = new();
-            List<string> symbolsData = new();
+            ConcurrentQueue<string> buffer = new();
 
             await foreach (var data in GetDataAsync())
             {
-                buffer.Add(data);
+                buffer.Enqueue(data);
 
                 if (buffer.Count > MAX_BUFFER_SIZE)
                 {
-
-                    symbolsData.AddRange(buffer);
-buffer.Clear();
-
-                    SaveData(symbolsData);
-                    symbolsData.Clear();
-                    //ClearBuffer(ref buffer);
+                    List<string> batch = new();
+                    for (int i = 0; i < MAX_BUFFER_SIZE; i++)
+                    {
+                        if (buffer.TryDequeue(out string item)) {
+                            batch.Add(item);
+                        }
+                    }
+                    SaveData(batch);
                 }
 
                 Console.WriteLine(data);
@@ -94,16 +92,14 @@ buffer.Clear();
                 symbols.Add(convertedSymbol);
             });
 
-            using var scope = serviceScopeFactory.CreateScope();
-            var repo = scope.ServiceProvider.GetRequiredService<ISymbolPriceRepository>();
+            if(_dbContext is null)
+            {
+                _scope = serviceScopeFactory.CreateScope();
+                _dbContext = _scope.ServiceProvider.GetRequiredService<IdentityCoreDbContext>();
+                _repo = _scope.ServiceProvider.GetRequiredService<ISymbolPriceRepository>();
+            }
 
-            repo.BulkInsert(symbols);
-            //_priceRepository.BulkInsert(symbols);
-        }
-
-        public void ClearBuffer(ref List<string> buffer)
-        {
-            buffer.Clear();
+            _repo.BulkInsert(symbols);
         }
     }
 }
