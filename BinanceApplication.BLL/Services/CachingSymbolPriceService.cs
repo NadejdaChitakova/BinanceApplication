@@ -1,6 +1,6 @@
 ﻿using BinanceApplication.BLL.Contracts;
 using BinanceApplication.BLL.Models.RequestModels;
-using BinanceApplication.Infrastructure.Models;
+using BinanceApplication.BLL.Repositories;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace BinanceApplication.BLL.Services

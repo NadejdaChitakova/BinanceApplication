@@ -1,6 +1,6 @@
 ﻿using BinanceApplication.BLL.Contracts;
 using BinanceApplication.BLL.Models.RequestModels;
-using BinanceApplication.Infrastructure.Models;
+using BinanceApplication.BLL.Repositories;
 using BinanceApplication.Infrastructure.Repositories;
 
 namespace BinanceApplication.BLL.Services
