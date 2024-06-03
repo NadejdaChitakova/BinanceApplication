@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48FEDDFE-A453-49AC-A2B9-C827BD93363E}"
 	ProjectSection(SolutionItems) = preProject
 		docker-compose.yml = docker-compose.yml
+		Instructions.txt = Instructions.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinanceApplication.BLL", "BinanceApplication.BLL\BinanceApplication.BLL.csproj", "{E29CF5D8-3E0A-4430-ABC1-7DA9825CF09F}"

@@ -1,0 +1,14 @@
+Prerequisites:
+1. You should have Visual Studio ( or other enviroment) installed
+2. You should have Docker installed
+3. You should have .Net Core installed
+
+How to start the application:
+1. Open the solution
+2. Restore Nuget packages
+3. Open terminal at solution and execute "docker compose up" to start the database
+4. Open the package manager console and apply migrations to the database. Execute "Update-database" command
+5. Set BinanceApplication.API as startup project
+6. Start the application
+
+Note: After correct start of the application you can see received events at Visual Studio Debug Console
