@@ -58,7 +58,6 @@ namespace BinanceApplication.BLL.Services
 
                 Console.WriteLine(data);
             }
-
         }
 
         private async IAsyncEnumerable<string> GetDataAsync()

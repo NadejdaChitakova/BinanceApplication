@@ -1,4 +1,5 @@
 ﻿using BinanceApplication.BLL.Contracts;
+using BinanceApplication.BLL.Models.BinanceApiModels;
 using BinanceApplication.Infrastructure.DbEntities;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -16,7 +17,7 @@ namespace BinanceApplication.BLL.Services
 using JsonDocument document = JsonDocument.Parse(value);
 JsonElement dataElement = document.RootElement.GetProperty("data");
                 
-                var data = JsonSerializer.Deserialize<Test>(dataElement.GetRawText(), new JsonSerializerOptions
+                var data = JsonSerializer.Deserialize<BinanceDataModel>(dataElement.GetRawText(), new JsonSerializerOptions
                 {
                     NumberHandling = JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
                 });
@@ -33,12 +34,5 @@ JsonElement dataElement = document.RootElement.GetProperty("data");
 
             return result;
         }
-    }
-
-    public class Test
-    {
-        public decimal c { get; set; }
-        public string s { get; set; }
-        public long E { get; set; }
     }
 }

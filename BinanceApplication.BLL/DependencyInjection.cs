@@ -9,10 +9,12 @@ namespace BinanceApplication.BLL
     {
         public static IServiceCollection AddCore(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<ISymbolPriceService, SymbolPriceService>();
+            services.Decorate<ISymbolPriceService, CachingSymbolPriceService>();
 
             services.AddScoped<IConverterService, ConverterService>();
-            services.AddScoped<ISymbolPriceService, SymbolPriceService>();
-            //services.AddHostedService<BackgroundService>();
+
+            services.AddMemoryCache();
 
             return services;
         }

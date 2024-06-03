@@ -1,6 +1,6 @@
 ﻿using BinanceApplication.BLL.Contracts;
 using BinanceApplication.BLL.Models.RequestModels;
-using BinanceApplication.BLL.Repositories;
+using BinanceApplication.Infrastructure.Models;
 using BinanceApplication.Infrastructure.Repositories;
 
 namespace BinanceApplication.BLL.Services
@@ -15,54 +15,38 @@ namespace BinanceApplication.BLL.Services
             return averagePrice;
         }
 
-        public async Task<List<AverageMovingPrice>> SimpleMovingAverage(SimpleMovingAverageRequest request)
+        public async Task<List<AverageMovingPrice>?> SimpleMovingAverage(SimpleMovingAverageRequest request)
         {
             var period = ParsePeriodToTimeSpam(request.Period);
 
             if(period == new TimeSpan())
             {
-                return new List<AverageMovingPrice>();
+                return [];
             }
 
             var dates = GetSimpleMovingDates(request.NumberOfDataPoints, period, request.StartTime);
 
             var simpleMovingAverage = await repository.GetSimpleMovingAverage(request.Symbol, dates);
 
-            if (simpleMovingAverage is null)
-            {
-                return new List<AverageMovingPrice>();
-            }
-
             return simpleMovingAverage;
         }
 
-        private TimeSpan ParsePeriodToTimeSpam(string period)
-        {
-            switch (period)
+        private TimeSpan ParsePeriodToTimeSpam(string period) =>
+            period switch
             {
-                case "1w":
-                    return TimeSpan.FromDays(7);
-                case "1d":
-                    return TimeSpan.FromDays(1);
-                case "30m":
-                    return TimeSpan.FromMinutes(30);
-                case "5m":
-                    return TimeSpan.FromMinutes(5);
-                case "1m":
-                    return TimeSpan.FromMinutes(1);
-                default:
-                    return new TimeSpan();
-            }
-        }
+                "1w" => TimeSpan.FromDays(7),
+                "1d" => TimeSpan.FromDays(1),
+                "30m" => TimeSpan.FromMinutes(30),
+                "5m" => TimeSpan.FromMinutes(5),
+                "1m" => TimeSpan.FromMinutes(1),
+                _ => new TimeSpan()
+            };
 
         private List<DateTime> GetSimpleMovingDates(int numberOfDataPoints, TimeSpan period, DateTime? startTime)
         {
             List<DateTime> dates = new();
 
-            if (!startTime.HasValue)
-            {
-                startTime = DateTime.UtcNow;
-            }
+            startTime ??= DateTime.UtcNow;
 
             for (int i = 0; i < numberOfDataPoints; i++)
             {

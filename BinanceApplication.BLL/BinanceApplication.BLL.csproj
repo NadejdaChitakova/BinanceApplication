@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Binance.Spot" Version="4.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Scrutor" Version="4.2.2" />
   </ItemGroup>
 
   <ItemGroup>
